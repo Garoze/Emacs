@@ -58,6 +58,10 @@ Integration with use-package
     :config
     (evil-mode 1)
 #+end_src
+** Evil custom keybinds
+#+begin_src elisp
+  (with-eval-after-load 'evil-maps (define-key evil-motion-state-map (kbd "TAB") nil))
+#+end_src
 ** Extras 
 *** Evil surround
 #+begin_src elisp
@@ -144,20 +148,23 @@ Integration with use-package
 #+end_src
 
 ** UI
+*** Disable modes
 #+begin_src elisp
   (tool-bar-mode 0)
   (scroll-bar-mode 0)
   (menu-bar-mode 0)
-
+#+end_src
+*** Disable startup message
+#+begin_src elisp
   (setq inhibit-startup-message t
         initial-scratch-message ""
         initial-major-mode 'fundamental-mode
         inhibit-splash-screen t)
-
-  (display-line-numbers-mode)
+#+end_src
+*** Line numbers 'relative
+#+begin_src elisp
+  (setq display-line-numbers-type 'relative) 
   (global-display-line-numbers-mode)
-  (setq display-line-numbers-current-absolute t) 
-  (setq display-line-numbers 'relative)
 #+end_src
 ** Themes
 *** All the icons
