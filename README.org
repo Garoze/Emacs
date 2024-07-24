@@ -237,6 +237,11 @@ Integration with use-package
   (add-to-list 'default-frame-alist '(font . "JetBrains Mono-11"))
   (setq-default line-spacing 0.12)
 #+end_src
+** Fix meta
+#+begin_src elisp
+  (setq  x-meta-keysym 'super
+         x-super-keysym 'meta)
+#+end_src
 * Keybinds
 #+begin_src elisp
   (use-package general
@@ -317,3 +322,5 @@ Integration with use-package
     (interactive)
     (load-file user-init-file))
 #+end_src
+
+* Org mode
