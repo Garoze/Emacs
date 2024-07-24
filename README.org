@@ -171,6 +171,10 @@ Integration with use-package
 #+end_src
 
 ** UI
+*** Enabled modes
+#+begin_src elisp
+  (recentf-mode 1)
+#+end_src
 *** Disable modes
 #+begin_src elisp
   (tool-bar-mode 0)
