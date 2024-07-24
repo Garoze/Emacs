@@ -106,11 +106,15 @@ Integration with use-package
 *** Evil lion
 #+begin_src elisp
   (use-package evil-lion
-    :straight t
     :config
-    (setq evil-lion-left-align-key (kbd "g a"))
-    (setq evil-lion-right-align-key (kbd "g A"))
-    (evil-lion-mode)) 
+    (evil-lion-mode))
+#+end_src
+**** Binds
+#+begin_src elisp
+  (define-key evil-normal-state-map (kbd "g l") 'evil-lion-left)
+  (define-key evil-normal-state-map (kbd "g L") 'evil-lion-right)
+  (define-key evil-visual-state-map (kbd "g l") 'evil-lion-left)
+  (define-key evil-visual-state-map (kbd "g L") 'evil-lion-right)
 #+end_src
 *** Evil collection
 #+begin_src elisp
