@@ -79,7 +79,7 @@ Integration with use-package
     (unless (display-graphic-p)
       (setq evil-want-C-i-jump nil))
     :config
-    (evil-mode 1)
+    (evil-mode 1))
 #+end_src
 ** Evil custom keybinds
 #+begin_src elisp
