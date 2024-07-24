@@ -10,7 +10,7 @@
   - [[#straightel-fixes][Straight.el fixes]]
 - [[#gc][GC]]
 - [[#evil][Evil]]
-  - [[#evil-custom-keybinds][Evil custom keybinds]]
+  - [[#custom-keybinds][Custom keybinds]]
   - [[#extras][Extras]]
 - [[#editor][Editor]]
   - [[#m-x][M-x]]
@@ -81,9 +81,12 @@ Integration with use-package
     :config
     (evil-mode 1))
 #+end_src
-** Evil custom keybinds
+** Custom keybinds
 #+begin_src elisp
-  (with-eval-after-load 'evil-maps (define-key evil-motion-state-map (kbd "TAB") nil))
+  (with-eval-after-load 'evil-maps
+    (define-key evil-motion-state-map (kbd "SPC") nil)
+    (define-key evil-motion-state-map (kbd "RET") nil)
+    (define-key evil-motion-state-map (kbd "TAB") nil))
 #+end_src
 ** Extras 
 *** Evil surround
@@ -99,9 +102,9 @@ Integration with use-package
     :after evil
     :config
     :hook 
-    ((prog-mode . turn-on-evil-quickscope-mode)
+    ((prog-mode  . turn-on-evil-quickscope-mode)
      (LaTeX-mode . turn-on-evil-quickscope-mode)
-     (org-mode . turn-on-evil-quickscope-mode))) 
+     (org-mode   . turn-on-evil-quickscope-mode))) 
 #+end_src
 *** Evil lion
 #+begin_src elisp
@@ -348,6 +351,8 @@ Integration with use-package
     :commands toc-org-enable
     :init
     (add-hook 'org-mode-hook 'toc-org-enable))
+
+  (add-hook 'org-mode-hook 'org-indent-mode)
 #+end_src
 ** Org-tempo
 #+begin_src elisp
