@@ -20,6 +20,10 @@
   - [[#fix-meta][Fix meta]]
 - [[#keybinds][Keybinds]]
 - [[#org-mode][Org mode]]
+  - [[#org-bullets][Org bullets]]
+  - [[#toc-org][toc-org]]
+  - [[#org-tempo][Org-tempo]]
+  - [[#extras-1][Extras]]
 
 * Lexical binding
 #+begin_src elisp
@@ -324,3 +328,51 @@ Integration with use-package
 #+end_src
 
 * Org mode
+** Org bullets
+#+begin_src elisp
+  (use-package org-bullets)
+  (add-hook 'org-mode-hook
+            (lambda () (org-bullets-mode 1)))
+#+end_src
+** toc-org
+#+begin_src elisp
+  (use-package toc-org
+    :commands toc-org-enable
+    :init
+    (add-hook 'org-mode-hook 'toc-org-enable))
+#+end_src
+** Org-tempo
+#+begin_src elisp
+  (require 'org-tempo)
+#+end_src
+** Extras
+*** Sane defaults
+#+begin_src elisp
+  (delete-selection-mode 1)
+  (eletric-pair-mode 1)
+  (eletric-indent-mode -1)
+  (global-auto-revert-mode t)
+  (setq org-edit-src-content-indentation 2)
+  #+end_src
+*** Hooks
+#+begin_src elisp
+  (add-hook 'org-mode-hook (lambda ()
+                             (setq-local electric-pair-inhibit-predicate
+                                         `(lambda (c)
+                                            (if (char-equal c ?<) t (,electric-pair-inhibit-predicate c))))))
+#+end_src
+*** Binds
+#+begin_src elisp
+  (global-set-key [escape] 'keyboard-escape-quit)
+#+end_src
+*** Better header sizes
+#+begin_src elisp
+  (custom-set-faces
+   '(org-level-1 ((t (:inherit outline-1 :height 1.7))))
+   '(org-level-2 ((t (:inherit outline-2 :height 1.6))))
+   '(org-level-3 ((t (:inherit outline-3 :height 1.5))))
+   '(org-level-4 ((t (:inherit outline-4 :height 1.4))))
+   '(org-level-5 ((t (:inherit outline-5 :height 1.3))))
+   '(org-level-6 ((t (:inherit outline-5 :height 1.2))))
+   '(org-level-7 ((t (:inherit outline-5 :height 1.1)))))
+#+end_src
