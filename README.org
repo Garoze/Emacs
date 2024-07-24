@@ -1,0 +1,186 @@
+#+title: Emacs configuration
+#+author: Garoze
+#+property: header-args :tangle config.el
+
+* Lexical binding
+#+begin_src elisp
+  ;;; -*- lexical-binding: t -*-
+#+end_src
+* Straight package manager
+** Early-init 
+Setting the early-init file, so straight.el can work properly
+#+begin_src elisp :tangle test.el
+  (setq package-enable-at-startup nil)
+#+end_src
+** Bootstrap
+#+begin_src elisp
+  (defvar bootstrap-version)
+  (let ((bootstrap-file
+         (expand-file-name
+          "straight/repos/straight.el/bootstrap.el"
+          (or (bound-and-true-p straight-base-dir)
+              user-emacs-directory)))
+        (bootstrap-version 7))
+    (unless (file-exists-p bootstrap-file)
+      (with-current-buffer
+          (url-retrieve-synchronously
+           "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+           'silent 'inhibit-cookies)
+        (goto-char (point-max))
+        (eval-print-last-sexp)))
+    (load bootstrap-file nil 'nomessage))
+#+end_src
+** Straight.el fixes
+Integration with use-package
+#+begin_src elisp
+  (straight-use-package 'use-package)
+  (setq straight-use-package-by-default t)
+#+end_src
+  
+* GC
+#+begin_src elisp
+  (setq gc-cons-threshold 80000000)
+  (setq read-process-output-max (* 1024 1024))
+#+end_src
+
+* Evil
+#+begin_src elisp
+  (use-package evil
+    :init
+    (setq evil-want-integration t)
+    (setq evil-want-C-u-scroll t)
+    (setq evil-want-keybinding nil)
+    (setq evil-search-module 'evil-search)
+    (setq evil-split-window-below t)
+    (setq evil-vsplit-window-right t)
+    (unless (display-graphic-p)
+      (setq evil-want-C-i-jump nil))
+    :config
+    (evil-mode 1)
+#+end_src
+** Extras 
+*** Evil surround
+#+begin_src elisp
+  (use-package evil-surround
+    :after evil
+    :config
+    (global-evil-surround-mode 1))
+#+end_src
+*** Evil quickscope
+#+begin_src elisp
+  (use-package evil-quickscope
+    :after evil
+    :config
+    :hook 
+    ((prog-mode . turn-on-evil-quickscope-mode)
+     (LaTeX-mode . turn-on-evil-quickscope-mode)
+     (org-mode . turn-on-evil-quickscope-mode))) 
+#+end_src
+*** Evil lion
+#+begin_src elisp
+  (use-package evil-lion
+    :straight t
+    :config
+    (setq evil-lion-left-align-key (kbd "g a"))
+    (setq evil-lion-right-align-key (kbd "g A"))
+    (evil-lion-mode)) 
+#+end_src
+*** Evil collection
+#+begin_src elisp
+  (use-package evil-collection
+    :after evil
+    :config
+    (setq evil-collection-mode-list '(calendar dashboard dired ediff info magit ibuffer))
+    (evil-collection-init))
+#+end_src
+*** Evil Org
+#+begin_src elisp
+  (use-package evil-org 
+    :after org
+    :config 
+    (add-hook 'org-mode-hook 'evil-org-mode)
+    (add-hook 'evil-org-mode-hook
+              (lambda () (evil-org-set-key-theme))))
+
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys)
+#+end_src
+
+* Editor
+** M-x
+*** Vertico
+#+begin_src elisp
+  (use-package vertico
+    :custom
+    (vertico-scroll-margin 0) 
+    (vertico-count 20) 
+    (vertico-resize t) 
+    (vertico-cycle t) 
+    :init
+    (vertico-mode))
+#+end_src
+*** Savehist
+#+begin_src elisp
+  (use-package savehist
+    :init
+    (savehist-mode))
+#+end_src
+*** Orderless
+#+begin_src  elisp
+  (use-package orderless
+    :custom
+    ;; Configure a custom style dispatcher (see the Consult wiki)
+    ;; (orderless-style-dispatchers '(+orderless-consult-dispatch orderless-affix-dispatch))
+    ;; (orderless-component-separator #'orderless-escapable-split-on-space)
+    (completion-styles '(orderless basic))
+    (completion-category-defaults nil)
+    (completion-category-overrides '((file (styles partial-completion)))))  
+#+end_src
+*** Marginalia
+#+begin_src elisp
+  (use-package marginalia
+    :config
+    (marginalia-mode))
+#+end_src
+
+** UI
+#+begin_src elisp
+  (tool-bar-mode 0)
+  (scroll-bar-mode 0)
+  (menu-bar-mode 0)
+
+  (setq inhibit-startup-message t
+        initial-scratch-message ""
+        initial-major-mode 'fundamental-mode
+        inhibit-splash-screen t)
+
+  (display-line-numbers-mode)
+  (global-display-line-numbers-mode)
+  (setq display-line-numbers-current-absolute t) 
+  (setq display-line-numbers 'relative)
+#+end_src
+** Themes
+*** All the icons
+#+begin_src elisp
+  (use-package all-the-icons
+    :if
+    (display-graphic-p))
+#+end_src
+*** Doom themes
+#+begin_src elisp
+  (use-package doom-themes
+    :ensure t
+    :config
+    (setq doom-themes-enable-bold t    
+          doom-themes-enable-italic t) 
+    (load-theme 'doom-one t)
+
+    (doom-themes-visual-bell-config)
+    (doom-themes-org-config))
+#+end_src
+*** Doom modeline
+#+begin_src elisp
+  (use-package doom-modeline
+    :init
+    (doom-modeline-mode 1))
+#+end_src
