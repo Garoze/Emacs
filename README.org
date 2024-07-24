@@ -191,3 +191,30 @@ Integration with use-package
     :init
     (doom-modeline-mode 1))
 #+end_src
+
+** Fonts
+#+begin_src elisp
+  (set-face-attribute 'default nil
+                      :font "JetBrains Mono"
+                      :height 110
+                      :weight 'medium)
+
+  (set-face-attribute 'variable-pitch nil
+                      :font "Ubuntu"
+                      :height 120
+                      :weight 'medium)
+
+  (set-face-attribute 'fixed-pitch nil
+                      :font "JetBrains Mono"
+                      :height 110
+                      :weight 'medium)
+
+  (set-face-attribute 'font-lock-comment-face nil
+                      :slant 'italic)
+
+  (set-face-attribute 'font-lock-keyword-face nil
+                      :slant 'italic)
+
+  (add-to-list 'default-frame-alist '(font . "JetBrains Mono-11"))
+  (setq-default line-spacing 0.12)
+#+end_src
