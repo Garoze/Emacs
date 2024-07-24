@@ -2,6 +2,25 @@
 #+author: Garoze
 #+property: header-args :tangle config.el
 
+* Table of Contents :TOC:
+- [[#lexical-binding][Lexical binding]]
+- [[#straight-package-manager][Straight package manager]]
+  - [[#early-init][Early-init]]
+  - [[#bootstrap][Bootstrap]]
+  - [[#straightel-fixes][Straight.el fixes]]
+- [[#gc][GC]]
+- [[#evil][Evil]]
+  - [[#evil-custom-keybinds][Evil custom keybinds]]
+  - [[#extras][Extras]]
+- [[#editor][Editor]]
+  - [[#m-x][M-x]]
+  - [[#ui][UI]]
+  - [[#themes][Themes]]
+  - [[#fonts][Fonts]]
+  - [[#fix-meta][Fix meta]]
+- [[#keybinds][Keybinds]]
+- [[#org-mode][Org mode]]
+
 * Lexical binding
 #+begin_src elisp
   ;;; -*- lexical-binding: t -*-
