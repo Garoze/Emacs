@@ -24,6 +24,7 @@
   - [[#toc-org][toc-org]]
   - [[#org-tempo][Org-tempo]]
   - [[#extras-1][Extras]]
+- [[#winum][Winum]]
 
 * Lexical binding
 #+begin_src elisp
@@ -389,3 +390,23 @@ Integration with use-package
    '(org-level-6 ((t (:inherit outline-5 :height 1.2))))
    '(org-level-7 ((t (:inherit outline-5 :height 1.1)))))
 #+end_src
+
+* Winum
+#+begin_src elisp
+  (use-package winum
+    :config
+    (global-set-key (kbd "M-1") 'winum-select-window-1)
+    (global-set-key (kbd "M-2") 'winum-select-window-2)
+    (global-set-key (kbd "M-3") 'winum-select-window-3)
+    (global-set-key (kbd "M-4") 'winum-select-window-4)
+    (setq window-numbering-scope            'global
+          winum-reverse-frame-list          nil
+          winum-auto-assign-0-to-minibuffer t
+          winum-auto-setup-mode-line        t
+          winum-format                      " %s "
+          winum-mode-line-position          1
+          winum-ignored-buffers             '(" *which-key*")
+          winum-ignored-buffers-regexp      '(" \\*Treemacs-.*"))
+    (winum-mode))
+#+end_src
+
