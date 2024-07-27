@@ -17,6 +17,7 @@
   - [[#ui][UI]]
   - [[#themes][Themes]]
   - [[#fonts][Fonts]]
+  - [[#pretty-symbols][Pretty symbols]]
   - [[#fix-meta][Fix meta]]
 - [[#keybinds][Keybinds]]
 - [[#org-mode][Org mode]]
@@ -257,6 +258,10 @@ Integration with use-package
 
   (add-to-list 'default-frame-alist '(font . "JetBrains Mono-11"))
   (setq-default line-spacing 0.12)
+#+end_src
+** Pretty symbols
+#+begin_src elisp
+  (global-prettify-symbols-mode 1)
 #+end_src
 ** Fix meta
 #+begin_src elisp
