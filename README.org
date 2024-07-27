@@ -11,7 +11,11 @@
 - [[#gc][GC]]
 - [[#evil][Evil]]
   - [[#custom-keybinds][Custom keybinds]]
-  - [[#extras][Extras]]
+  - [[#evil-surround][Evil surround]]
+  - [[#evil-quickscope][Evil quickscope]]
+  - [[#evil-lion][Evil lion]]
+  - [[#evil-collection][Evil collection]]
+  - [[#evil-org][Evil Org]]
 - [[#editor][Editor]]
   - [[#m-x][M-x]]
   - [[#ui][UI]]
@@ -24,7 +28,7 @@
   - [[#org-bullets][Org bullets]]
   - [[#toc-org][toc-org]]
   - [[#org-tempo][Org-tempo]]
-  - [[#extras-1][Extras]]
+  - [[#extras][Extras]]
 - [[#winum][Winum]]
 - [[#breadcrumb][Breadcrumb]]
 - [[#whichkey][Whichkey]]
@@ -95,15 +99,14 @@ Integration with use-package
     (define-key evil-motion-state-map (kbd "RET") nil)
     (define-key evil-motion-state-map (kbd "TAB") nil))
 #+end_src
-** Extras 
-*** Evil surround
+** Evil surround
 #+begin_src elisp
   (use-package evil-surround
     :after evil
     :config
     (global-evil-surround-mode 1))
 #+end_src
-*** Evil quickscope
+** Evil quickscope
 #+begin_src elisp
   (use-package evil-quickscope
     :after evil
@@ -113,7 +116,7 @@ Integration with use-package
      (LaTeX-mode . turn-on-evil-quickscope-mode)
      (org-mode   . turn-on-evil-quickscope-mode))) 
 #+end_src
-*** Evil lion
+** Evil lion
 #+begin_src elisp
   (use-package evil-lion
     :config
@@ -126,7 +129,7 @@ Integration with use-package
   (define-key evil-visual-state-map (kbd "g l") 'evil-lion-left)
   (define-key evil-visual-state-map (kbd "g L") 'evil-lion-right)
 #+end_src
-*** Evil collection
+** Evil collection
 #+begin_src elisp
   (use-package evil-collection
     :after evil
@@ -134,7 +137,7 @@ Integration with use-package
     (setq evil-collection-mode-list '(calendar dashboard dired ediff info magit ibuffer))
     (evil-collection-init))
 #+end_src
-*** Evil Org
+** Evil Org
 #+begin_src elisp
   (use-package evil-org 
     :after org
