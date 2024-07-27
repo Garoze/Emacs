@@ -27,6 +27,7 @@
 - [[#winum][Winum]]
 - [[#breadcrumb][Breadcrumb]]
 - [[#whichkey][Whichkey]]
+- [[#magit][Magit]]
 
 * Lexical binding
 #+begin_src elisp
@@ -440,4 +441,10 @@ Integration with use-package
           which-key-max-description-length 25
           which-key-allow-imprecise-window-fit nil
           which-key-separator " ? " ))
+#+end_src
+
+* Magit
+#+begin_src elisp
+  (use-package magit)
+  (general-define-key :keymaps 'transient-base-map "<escape>" 'transient-quit-one)
 #+end_src
