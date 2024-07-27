@@ -28,6 +28,8 @@
 - [[#breadcrumb][Breadcrumb]]
 - [[#whichkey][Whichkey]]
 - [[#magit][Magit]]
+- [[#company][Company]]
+  - [[#company-box][Company box]]
 
 * Lexical binding
 #+begin_src elisp
@@ -370,7 +372,7 @@ Integration with use-package
   (eletric-indent-mode -1)
   (global-auto-revert-mode t)
   (setq org-edit-src-content-indentation 2)
-  #+end_src
+#+end_src
 *** Hooks
 #+begin_src elisp
   (add-hook 'org-mode-hook (lambda ()
@@ -447,4 +449,27 @@ Integration with use-package
 #+begin_src elisp
   (use-package magit)
   (general-define-key :keymaps 'transient-base-map "<escape>" 'transient-quit-one)
+#+end_src
+
+* Company
+#+begin_src elisp
+  (use-package company
+    :config 
+    ;; Remove the M-n option to select since i'm using winum
+    (company-keymap--unbind-quick-access company-active-map) 
+    ;; (company-tng-configure-default)
+    :custom
+    (company-begin-commands '(self-insert-command))
+    (company-idle-delay .1)
+    (company-minimum-prefix-length 2)
+    (company-show-numbers t)
+    (company-tooltip-align-annotations 't)
+    (global-company-mode t))
+#+end_src
+** Company box
+#+begin_src elisp
+  (use-package company-box
+    :after company
+    :hook
+    (company-mode . company-box-mode))
 #+end_src
