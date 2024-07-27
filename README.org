@@ -25,6 +25,7 @@
   - [[#org-tempo][Org-tempo]]
   - [[#extras-1][Extras]]
 - [[#winum][Winum]]
+- [[#breadcrumb][Breadcrumb]]
 
 * Lexical binding
 #+begin_src elisp
@@ -410,3 +411,10 @@ Integration with use-package
     (winum-mode))
 #+end_src
 
+* Breadcrumb
+#+begin_src elisp
+  (use-package breadcrumb
+    :config
+    (setq which-func-functions #'(breadcrumb-imenu-crumbs))
+    (breadcrumb-mode))
+#+end_src
