@@ -22,6 +22,7 @@
   - [[#themes][Themes]]
   - [[#fonts][Fonts]]
   - [[#pretty-symbols][Pretty symbols]]
+  - [[#ligatures-jetbrains-mono][Ligatures Jetbrains Mono]]
   - [[#fix-meta][Fix meta]]
 - [[#keybinds][Keybinds]]
 - [[#org-mode][Org mode]]
@@ -264,6 +265,25 @@ Integration with use-package
 #+begin_src elisp
   (global-prettify-symbols-mode 1)
 #+end_src
+** Ligatures Jetbrains Mono
+#+begin_src elisp
+  (use-package ligature
+    :config
+    (ligature-set-ligatures 'prog-mode '("--" "---" "==" "===" "!=" "!==" "=!="
+                                         "=:=" "=/=" "<=" ">=" "&&" "&&&" "&=" "++" "+++" "***" ";;" "!!"
+                                         "??" "???" "?:" "?." "?=" "<:" ":<" ":>" ">:" "<:<" "<>" "<<<" ">>>"
+                                         "<<" ">>" "||" "-|" "_|_" "|-" "||-" "|=" "||=" "##" "###" "####"
+                                         "#{" "#[" "]#" "#(" "#?" "#_" "#_(" "#:" "#!" "#=" "^=" "<$>" "<$"
+                                         "$>" "<+>" "<+" "+>" "<*>" "<*" "*>" "</" "</>" "/>" "<!--" "<#--"
+                                         "-->" "->" "->>" "<<-" "<-" "<=<" "=<<" "<<=" "<==" "<=>" "<==>"
+                                         "==>" "=>" "=>>" ">=>" ">>=" ">>-" ">-" "-<" "-<<" ">->" "<-<" "<-|"
+                                         "<=|" "|=>" "|->" "<->" "<~~" "<~" "<~>" "~~" "~~>" "~>" "~-" "-~"
+                                         "~@" "[||]" "|]" "[|" "|}" "{|" "[<" ">]" "|>" "<|" "||>" "<||"
+                                         "|||>" "<|||" "<|>" "..." ".." ".=" "..<" ".?" "::" ":::" ":=" "::="
+                                         ":?" ":?>" "//" "///" "/*" "*/" "/=" "//=" "/==" "@_" "__" "???"
+                                         "<:<" ";;;"))
+    (global-ligature-mode t))
+#+end_src
 ** Fix meta
 #+begin_src elisp
   (setq  x-meta-keysym 'super
@@ -454,7 +474,7 @@ Integration with use-package
 * Magit
 #+begin_src elisp
   (use-package magit)
-  (general-define-key :keymaps 'transient-base-map "<escape>" 'transient-quit-one)
+  (define-key transient-base-map (kbd "<escape>") 'transient-quit-one)
 #+end_src
 
 * Company
