@@ -43,9 +43,9 @@
   ;;; -*- lexical-binding: t -*-
 #+end_src
 * Straight package manager
-** Early-init 
+** Early-init
 Setting the early-init file, so straight.el can work properly
-#+begin_src elisp :tangle test.el
+#+begin_src elisp :tangle early-init.el
   (setq package-enable-at-startup nil)
 #+end_src
 ** Bootstrap
@@ -72,7 +72,7 @@ Integration with use-package
   (straight-use-package 'use-package)
   (setq straight-use-package-by-default t)
 #+end_src
-  
+
 * GC
 #+begin_src elisp
   (setq gc-cons-threshold 80000000)
@@ -113,10 +113,10 @@ Integration with use-package
   (use-package evil-quickscope
     :after evil
     :config
-    :hook 
+    :hook
     ((prog-mode  . turn-on-evil-quickscope-mode)
      (LaTeX-mode . turn-on-evil-quickscope-mode)
-     (org-mode   . turn-on-evil-quickscope-mode))) 
+     (org-mode   . turn-on-evil-quickscope-mode)))
 #+end_src
 ** Evil lion
 #+begin_src elisp
@@ -139,9 +139,9 @@ Integration with use-package
 #+end_src
 ** Evil Org
 #+begin_src elisp
-  (use-package evil-org 
+  (use-package evil-org
     :after org
-    :config 
+    :config
     (add-hook 'org-mode-hook 'evil-org-mode)
     (add-hook 'evil-org-mode-hook
               (lambda () (evil-org-set-key-theme))))
@@ -156,10 +156,10 @@ Integration with use-package
 #+begin_src elisp
   (use-package vertico
     :custom
-    (vertico-scroll-margin 0) 
-    (vertico-count 20) 
-    (vertico-resize t) 
-    (vertico-cycle t) 
+    (vertico-scroll-margin 0)
+    (vertico-count 20)
+    (vertico-resize t)
+    (vertico-cycle t)
     :init
     (vertico-mode))
 #+end_src
@@ -178,7 +178,7 @@ Integration with use-package
     ;; (orderless-component-separator #'orderless-escapable-split-on-space)
     (completion-styles '(orderless basic))
     (completion-category-defaults nil)
-    (completion-category-overrides '((file (styles partial-completion)))))  
+    (completion-category-overrides '((file (styles partial-completion)))))
 #+end_src
 *** Marginalia
 #+begin_src elisp
@@ -205,9 +205,18 @@ Integration with use-package
         initial-major-mode 'fundamental-mode
         inhibit-splash-screen t)
 #+end_src
+*** Disable dialog
+#+begin_src elisp
+  (setq use-file-dialog nil)
+  (setq use-dialog-box nil)
+#+end_src
+*** Disable Bell
+#+begin_src elisp
+  (setq-default visible-bell t)
+#+end_src
 *** Line numbers 'relative
 #+begin_src elisp
-  (setq display-line-numbers-type 'relative) 
+  (setq display-line-numbers-type 'relative)
   (global-display-line-numbers-mode)
 #+end_src
 ** Themes
@@ -222,8 +231,8 @@ Integration with use-package
   (use-package doom-themes
     :ensure t
     :config
-    (setq doom-themes-enable-bold t    
-          doom-themes-enable-italic t) 
+    (setq doom-themes-enable-bold t
+          doom-themes-enable-italic t)
     (load-theme 'doom-one t)
 
     (doom-themes-visual-bell-config)
@@ -313,8 +322,8 @@ Integration with use-package
     (general-create-definer nl/leader-keys
       :states '(normal insert visual emacs)
       :keymaps 'override
-      :prefix "SPC" 
-      :global-prefix "M-SPC") 
+      :prefix "SPC"
+      :global-prefix "M-SPC")
 
     (nl/leader-keys
       "SPC" '(execute-extended-command :wk "M-x")
@@ -332,12 +341,12 @@ Integration with use-package
       "b r" '(revert-buffer :wk "Reload buffer"))
 
     (nl/leader-keys
-      "e" '(:ignore t :wk "Evaluate")    
+      "e" '(:ignore t :wk "Evaluate")
       "e b" '(eval-buffer :wk "Evaluate elisp in buffer")
       "e d" '(eval-defun :wk "Evaluate defun containing or after point")
       "e e" '(eval-expression :wk "Evaluate and elisp expression")
       "e l" '(eval-last-sexp :wk "Evaluate elisp expression before point")
-      "e r" '(eval-region :wk "Evaluate elisp in region")) 
+      "e r" '(eval-region :wk "Evaluate elisp in region"))
 
     (nl/leader-keys
       "g" '(:ignore t :wk "Git")
@@ -495,9 +504,9 @@ Integration with use-package
 * Company
 #+begin_src elisp
   (use-package company
-    :config 
+    :config
     ;; Remove the M-n option to select since i'm using winum
-    (company-keymap--unbind-quick-access company-active-map) 
+    (company-keymap--unbind-quick-access company-active-map)
     ;; (company-tng-configure-default)
     :custom
     (company-begin-commands '(self-insert-command))
