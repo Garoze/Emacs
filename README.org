@@ -21,6 +21,7 @@
   - [[#ui][UI]]
   - [[#themes][Themes]]
   - [[#fonts][Fonts]]
+  - [[#buffer-name-and-unsaved-dot][Buffer name and unsaved dot]]
   - [[#pretty-symbols][Pretty symbols]]
   - [[#ligatures-jetbrains-mono][Ligatures Jetbrains Mono]]
   - [[#utf-8-and-lf-everywhere][UTF-8 and LF everywhere]]
@@ -270,6 +271,16 @@ Integration with use-package
 
   (add-to-list 'default-frame-alist '(font . "JetBrains Mono-11"))
   (setq-default line-spacing 0.12)
+#+end_src
+** Buffer name and unsaved dot
+#+begin_src elisp
+  (setq frame-title-format
+        '((:eval (if (buffer-file-name)
+                     (abbreviate-file-name (buffer-file-name))
+                   "%b"))
+          " - Emacs"
+          (:eval (if (buffer-modified-p)
+                     " • "))))
 #+end_src
 ** Pretty symbols
 #+begin_src elisp
