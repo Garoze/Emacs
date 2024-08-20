@@ -23,6 +23,7 @@
   - [[#fonts][Fonts]]
   - [[#pretty-symbols][Pretty symbols]]
   - [[#ligatures-jetbrains-mono][Ligatures Jetbrains Mono]]
+  - [[#utf-8-and-lf-everywhere][UTF-8 and LF everywhere]]
   - [[#fix-meta][Fix meta]]
 - [[#keybinds][Keybinds]]
 - [[#org-mode][Org mode]]
@@ -283,6 +284,20 @@ Integration with use-package
                                          ":?" ":?>" "//" "///" "/*" "*/" "/=" "//=" "/==" "@_" "__" "???"
                                          "<:<" ";;;"))
     (global-ligature-mode t))
+#+end_src
+** UTF-8 and LF everywhere
+#+begin_src elisp
+  (set-terminal-coding-system 'utf-8)
+  (set-language-environment 'utf-8)
+  (set-keyboard-coding-system 'utf-8)
+  (set-default-coding-systems 'utf-8)
+  (set-terminal-coding-system 'utf-8)
+  (prefer-coding-system 'utf-8)
+  (setq locale-coding-system 'utf-8)
+
+  (setq coding-system-for-read 'utf-8-unix)
+  (setq coding-system-for-write 'utf-8-unix)
+  (setq-default buffer-file-coding-system 'utf-8-unix)
 #+end_src
 ** Fix meta
 #+begin_src elisp
